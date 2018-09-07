@@ -8,16 +8,22 @@ class ArticleManager(models.Manager):
         else:
             # utilize foreignkey function
             reporter_f = Reporter()
-            source_f = Source()
+            reporter_f.save()
+            source_f = Source(name=source)
+            source_f.save()
             Article.objects.create(url=url, url_image=url_image, reporter=reporter_f, body=body, source=source_f, description=description, headline=headline, published_on=published_on)
+            print('saved')
 
 class Source(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=True)
 
 class Reporter(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    url = models.CharField(max_length=1000)
+    first_name = models.CharField(max_length=100, null=True)
+    last_name = models.CharField(max_length=100, null=True)
+    url = models.CharField(max_length=1000, null=True)
+
+    def __str__(self):
+        return "%s %s" % (self.first_name, self.last_name)
 
 class Article(models.Model):
     unique_id = models.CharField(max_length=1000, blank=True, null=True)

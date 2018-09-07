@@ -1,1 +1,1 @@
-news_api_key = "46bd8a2eb02c485ba51cea891e1f0b1b"
+news_api_key = "5f1d11633f29456287abf3369bb23419"
