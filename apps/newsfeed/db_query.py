@@ -1,0 +1,1 @@
+articles = "SELECT * FROM newsfeed_article ORDER BY "

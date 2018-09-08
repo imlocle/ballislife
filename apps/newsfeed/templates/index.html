@@ -1,0 +1,24 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ball is Life</title>
+</head>
+<body>
+    <h1>Ball is Life</h1>
+    <form action="/scrape">
+        <input type="submit" value="Update" />
+    </form>
+    <div class="newsfeed">
+        {% for i in newsfeed %}
+        <div>
+            <h5>{{i.headline}}</h5>
+            <h5>{{i.published_date}}</h5>
+            <h5>{{i.source.name}}</h5>
+        </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

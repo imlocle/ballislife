@@ -17,6 +17,6 @@ Including another URLconf
 from django.conf.urls import url, include
 
 urlpatterns = [
-    url(r'^', include('bball.urls')),
+    url(r'^', include('apps.newsfeed.urls')),
     #path('admin/', admin.site.urls),
 ]
