@@ -10,6 +10,15 @@
     <form action="/scrape">
         <input type="submit" value="Update" />
     </form>
+    <div class="newsfeed">
+        {% for i in newsfeed %}
+        <div>
+            <h5>{{i.headline}}</h5>
+            <h5>{{i.published_date}}</h5>
+            <h5>{{i.source.name}}</h5>
+        </div>
+        {% endfor %}
+    </div>
 
 </body>
 </html>
