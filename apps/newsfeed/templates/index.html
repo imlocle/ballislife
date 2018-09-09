@@ -13,9 +13,17 @@
     <div class="newsfeed">
         {% for i in newsfeed %}
         <div>
-            <h5>{{i.headline}}</h5>
-            <h5>{{i.published_date}}</h5>
-            <h5>{{i.source.name}}</h5>
+            <a href="{{i.url}}">
+                <h5>{{i.headline}}</h5>
+                <img src="{{i.url_image}}" alt="">
+            </a>
+            <h5>Published On: {{i.published_date}}</h5>
+            <h5>Source: {{i.source.name}}</h5>
+            {% if not i.reporter.first_name%}
+                <h5>Author: Unknown</h5>
+            {% else %}
+                <h5>Author: {{i.reporter.first_name}} {{i.reporter.last_name}}</h5>
+            {% endif %}
         </div>
         {% endfor %}
     </div>
