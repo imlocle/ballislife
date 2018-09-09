@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class BballConfig(AppConfig):
-    name = 'bball'
+class NewsfeedConfig(AppConfig):
+    name = 'newsfeed'

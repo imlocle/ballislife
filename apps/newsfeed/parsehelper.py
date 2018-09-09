@@ -1,4 +1,5 @@
 import re, requests
+from bs4 import BeautifulSoup as bs
 
 """
 This function is to parse out content using a regular expression pattern from a string.
@@ -22,3 +23,15 @@ def clean_html(raw_html):
     cleanr = re.compile('<.*?>')
     cleantext = re.sub(cleanr, '', raw_html)
     return cleantext
+
+def get_espn_body_text(url):
+    response = requests.get(url)
+    soup = bs(response.text, 'html.parser')
+    article_body = soup.find('div', attrs={'class':'article-body'}).text
+    return article_body
+
+def get_bleacher_report_body_text(url):
+    response = requests.get(url)
+    soup = bs(response.text, 'html.parser')
+    article_body = soup.find('div', attrs={'class':'organism contentStream'}).text.replace(u'\xa0',u'')
+    return article_body
