@@ -13,9 +13,13 @@
     <div class="newsfeed">
         {% for i in newsfeed %}
         <div>
-            <a href="{{i.url}}">
+            <a href="{{i.url}}" target="_blank">
                 <h5>{{i.headline}}</h5>
-                <img src="{{i.url_image}}" alt="">
+                {% if i.source.name == 'ESPN' and i.url_image == None %}
+                    <img src="http://logok.org/wp-content/uploads/2015/02/ESPN-logo-wordmark-880x660.png" alt="" width="15%" height="15%">
+                {% else %}
+                    <img src="{{i.url_image}}" alt="" width="15%" height="15%">
+                {% endif %}
             </a>
             <h5>Published On: {{i.published_date}}</h5>
             <h5>Source: {{i.source.name}}</h5>

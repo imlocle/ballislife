@@ -17,21 +17,39 @@ def parse_definition(regex_pattern, string):
         return output
 
 def get_page(url):
-    return requests.get(url).text
+    return requests.get(url)
 
 def clean_html(raw_html):
     cleanr = re.compile('<.*?>')
     cleantext = re.sub(cleanr, '', raw_html)
     return cleantext
 
-def get_espn_body_text(url):
-    response = requests.get(url)
-    soup = bs(response.text, 'html.parser')
-    article_body = soup.find('div', attrs={'class':'article-body'}).text
-    return article_body
-
 def get_bleacher_report_body_text(url):
     response = requests.get(url)
     soup = bs(response.text, 'html.parser')
     article_body = soup.find('div', attrs={'class':'organism contentStream'}).text.replace(u'\xa0',u'')
     return article_body
+
+def get_reporter_name(reporter, regex=None):
+    print("\n&&&&&&&")
+    print(reporter)
+    print("parsehelper\n")
+    if reporter is None:
+        return None
+    if regex is not None:
+        reporter = re.sub(regex, '', reporter).strip()
+    reporter_dict = {}
+    reporter = reporter.split()
+    if len(reporter) <= 3:
+        reporter_dict['first_name'] = reporter[0]
+        reporter_dict['last_name'] = reporter[len(reporter)-1]
+    else:
+        reporter_dict['first_name'] = reporter
+    return reporter_dict
+
+def try_beautifulsoup(beautifulsoup):
+    try:
+        obj = beautifulsoup
+    except:
+        obj = None
+    return obj
