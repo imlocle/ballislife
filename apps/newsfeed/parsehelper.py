@@ -31,9 +31,6 @@ def get_bleacher_report_body_text(url):
     return article_body
 
 def get_reporter_name(reporter, regex=None):
-    print("\n&&&&&&&")
-    print(reporter)
-    print("parsehelper\n")
     if reporter is None:
         return None
     if regex is not None:
@@ -46,10 +43,3 @@ def get_reporter_name(reporter, regex=None):
     else:
         reporter_dict['first_name'] = reporter
     return reporter_dict
-
-def try_beautifulsoup(beautifulsoup):
-    try:
-        obj = beautifulsoup
-    except:
-        obj = None
-    return obj

@@ -11,7 +11,7 @@ class ArticleManager(models.Manager):
             # Checking if article exist in db      
             the_article = Article.objects.filter(url=url)
             if the_article:
-                print(f"Headline:'{headline}'\nSouce: '{source}'\nAlready have this article\n")
+                print(f"\nHeadline:'{headline}'\nSouce: '{source}'\nAlready have this article\n")
                 Article.objects.update_article(the_article, reporter=reporter, body=body, published_date=published_date)
             else:
                 if reporter is not None:

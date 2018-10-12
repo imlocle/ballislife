@@ -1,0 +1,15 @@
+.newsfeed{
+    width: 50%;
+    margin: auto;
+    border: 1px solid black;
+}
+
+.article{
+    margin: auto;
+    border: 1px solid black;
+}
+
+.article img{
+    width: 35%;
+    height: 25%;
+}

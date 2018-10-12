@@ -10,7 +10,7 @@ def index(request):
     for i in Article.objects.raw("SELECT * FROM newsfeed_article ORDER BY published_date DESC"):
         newsfeed.append(i)
     context = {'newsfeed': newsfeed}
-    return render(request, "index.html", context)
+    return render(request, "newsfeed/index.html", context)
 
 def scrape(request):
     NewsApi().get_articles()

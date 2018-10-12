@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import xml.etree.ElementTree as ET
 import json, requests
 from .models import Article
-from .parsehelper import get_page, get_reporter_name, try_beautifulsoup
+from .parsehelper import get_page, get_reporter_name
 import logging
 
 logger = logging.getLogger('ftpuploader')
@@ -16,9 +16,8 @@ class Espn:
         root = ET.fromstring(response)
         for i in root.iter('item'):
             url = i.find('link').text
-            print(f'**** processing ESPN:{url} ****')
+            print(f'\n**** processing ESPN  ****\nURL:{url}\n****  **** ****\n')
             article_dict = get_espn_article(url)
-            print(article_dict)
             body = article_dict['Body']
             url_image = article_dict['UrlImage']
             headline = i.find('title').text
@@ -39,13 +38,18 @@ def get_espn_article(url):
         headline = article.find('header', attrs={'class':'article-header'})
         article_body = article.find('div', attrs={'class':'article-body'})
         try:
-            url_image = try_beautifulsoup(article.find('picture').find('source')['srcset'])   
+            url_image = article.find('picture').find('source')['srcset']
         except:
             url_image = None
         try:
             reporter = article_body.find('div', attrs={'class':'author has-bio'}).find('span').previous_sibling
         except:
             reporter = None
+        if reporter is None:
+            try:
+                reporter = article.find('div', attrs={'class':'author'}).find('span').previous_sibling
+            except:
+                reporter = None
         article_dict['Url'] = f"{url}"
         article_dict['UrlImage'] = url_image
         article_dict['Headline'] = headline.text

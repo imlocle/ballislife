@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ball is Life</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'newsfeed/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Ball is Life</h1>
+    <form action="/scrape">
+        <input class="btn btn-default" type="submit" value="Update" />
+    </form>
+    <div class="row">
+        {% for i in newsfeed %}
+            <div class="col-sm-6 col-md-3">
+                <a href="{{i.url}}" target="_blank">
+                <div class="thumbnail">
+                    {% if i.source.name == 'ESPN' and i.url_image == None %}
+                        <img src="http://logok.org/wp-content/uploads/2015/02/ESPN-logo-wordmark-880x660.png" alt="...">
+                    {% else %}
+                        <img src="{{i.url_image}}" alt="...">
+                    {% endif %}
+                    <div class="caption">
+                        <h5>{{i.headline}}</h5>
+                </a>
+                        <h6>Published On: {{i.published_date}}</h6>
+                        <h6>{{i.source.name}}</h6>
+                    {% if i.reporter.first_name is not None %}
+                        <h6>By: {{i.reporter.first_name}} {{i.reporter.last_name}}</h6>
+                    {% endif %}
+                    </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- <div class="newsfeed">
+        {% for i in newsfeed %}
+        <div class="article">
+            <a href="{{i.url}}" target="_blank">
+                <h3>{{i.headline}}</h3>
+                {% if i.source.name == 'ESPN' and i.url_image == None %}
+                <img src="http://logok.org/wp-content/uploads/2015/02/ESPN-logo-wordmark-880x660.png" alt="" width="15%" height="15%">
+                {% else %}
+                <img class="media-object" src="{{i.url_image}}" alt="">
+                {% endif %}
+            </a>
+            <h6>Published On: {{i.published_date}}</h6>
+            <h5>Source: {{i.source.name}}</h5>
+            {% if i.reporter.first_name is not None %}
+                <h6>By: {{i.reporter.first_name}} {{i.reporter.last_name}}</h6>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div> -->
+
+</body>
+</html>
